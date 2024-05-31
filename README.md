@@ -40,4 +40,3 @@ By the end of this tutorial, you'll have a fully functional backend that can sea
 ### YouTube Playlist
 
 For detailed step-by-step instructions, watch the complete tutorial on YouTube: [Django DRF and React Tutorial Playlist](https://www.youtube.com/playlist?list=PLqBkE229enDXQP2mT_-dUAgVXD431cFXs)
-```
