@@ -1,0 +1,59 @@
+
+
+
+services:
+  db:
+    image: postgres:14.3-alpine
+
+    restart: always
+
+    volumes:
+      - postgres_data_main_update:/var/lib/postgresql/data
+
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+
+  redis:
+    image: redis:latest
+
+
+  web:
+    build: .
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - .:/app
+
+    depends_on:
+      - db
+      - redis
+    
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    
+
+
+  celery-beat:
+    build: .
+
+    command: ["celery", "-A", "backend", "worker", "--beat", "-l" , "INFO"]
+
+    volumes:
+      - .:/app
+
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data_main_update:
+
+
+
